@@ -1,0 +1,317 @@
+	.text
+	.attribute	4, 16
+	.attribute	5, "rv64i2p1_m2p0_a2p1_f2p2_d2p2_c2p0_zicsr2p0_zmmul1p0"
+	.file	"cross_comp_bubble_sort.c"
+	.globl	int_comparator                  # -- Begin function int_comparator
+	.p2align	1
+	.type	int_comparator,@function
+int_comparator:                         # @int_comparator
+	.cfi_startproc
+# %bb.0:
+	addi	sp, sp, -32
+	.cfi_def_cfa_offset 32
+	sd	ra, 24(sp)                      # 8-byte Folded Spill
+	sd	s0, 16(sp)                      # 8-byte Folded Spill
+	.cfi_offset ra, -8
+	.cfi_offset s0, -16
+	addi	s0, sp, 32
+	.cfi_def_cfa s0, 0
+                                        # kill: def $x12 killed $x11
+                                        # kill: def $x12 killed $x10
+	sw	a0, -20(s0)
+	sw	a1, -24(s0)
+	lw	a1, -20(s0)
+	lw	a0, -24(s0)
+	slt	a0, a0, a1
+	ld	ra, 24(sp)                      # 8-byte Folded Reload
+	ld	s0, 16(sp)                      # 8-byte Folded Reload
+	addi	sp, sp, 32
+	ret
+.Lfunc_end0:
+	.size	int_comparator, .Lfunc_end0-int_comparator
+	.cfi_endproc
+                                        # -- End function
+	.globl	int_swap                        # -- Begin function int_swap
+	.p2align	1
+	.type	int_swap,@function
+int_swap:                               # @int_swap
+	.cfi_startproc
+# %bb.0:
+	addi	sp, sp, -48
+	.cfi_def_cfa_offset 48
+	sd	ra, 40(sp)                      # 8-byte Folded Spill
+	sd	s0, 32(sp)                      # 8-byte Folded Spill
+	.cfi_offset ra, -8
+	.cfi_offset s0, -16
+	addi	s0, sp, 48
+	.cfi_def_cfa s0, 0
+                                        # kill: def $x13 killed $x12
+                                        # kill: def $x13 killed $x11
+	sd	a0, -24(s0)
+	sw	a1, -28(s0)
+	sw	a2, -32(s0)
+	ld	a0, -24(s0)
+	lw	a1, -28(s0)
+	slli	a1, a1, 2
+	add	a0, a0, a1
+	lw	a0, 0(a0)
+	sw	a0, -36(s0)
+	ld	a1, -24(s0)
+	lw	a0, -32(s0)
+	slli	a0, a0, 2
+	add	a0, a0, a1
+	lw	a0, 0(a0)
+	lw	a2, -28(s0)
+	slli	a2, a2, 2
+	add	a1, a1, a2
+	sw	a0, 0(a1)
+	lw	a0, -36(s0)
+	ld	a1, -24(s0)
+	lw	a2, -32(s0)
+	slli	a2, a2, 2
+	add	a1, a1, a2
+	sw	a0, 0(a1)
+	ld	a0, -24(s0)
+	ld	ra, 40(sp)                      # 8-byte Folded Reload
+	ld	s0, 32(sp)                      # 8-byte Folded Reload
+	addi	sp, sp, 48
+	ret
+.Lfunc_end1:
+	.size	int_swap, .Lfunc_end1-int_swap
+	.cfi_endproc
+                                        # -- End function
+	.globl	bubble_sort                     # -- Begin function bubble_sort
+	.p2align	1
+	.type	bubble_sort,@function
+bubble_sort:                            # @bubble_sort
+	.cfi_startproc
+# %bb.0:
+	addi	sp, sp, -48
+	.cfi_def_cfa_offset 48
+	sd	ra, 40(sp)                      # 8-byte Folded Spill
+	sd	s0, 32(sp)                      # 8-byte Folded Spill
+	.cfi_offset ra, -8
+	.cfi_offset s0, -16
+	addi	s0, sp, 48
+	.cfi_def_cfa s0, 0
+                                        # kill: def $x12 killed $x11
+	sd	a0, -24(s0)
+	sw	a1, -28(s0)
+	li	a0, 0
+	sw	a0, -32(s0)
+	li	a0, 1
+	sw	a0, -36(s0)
+	j	.LBB2_1
+.LBB2_1:                                # =>This Loop Header: Depth=1
+                                        #     Child Loop BB2_3 Depth 2
+	lw	a0, -36(s0)
+	beqz	a0, .LBB2_9
+	j	.LBB2_2
+.LBB2_2:                                #   in Loop: Header=BB2_1 Depth=1
+	li	a0, 0
+	sw	a0, -36(s0)
+	sw	a0, -40(s0)
+	j	.LBB2_3
+.LBB2_3:                                #   Parent Loop BB2_1 Depth=1
+                                        # =>  This Inner Loop Header: Depth=2
+	lw	a1, -40(s0)
+	lw	a0, -28(s0)
+	lw	a2, -32(s0)
+	subw	a0, a0, a2
+	addiw	a0, a0, -2
+	blt	a0, a1, .LBB2_8
+	j	.LBB2_4
+.LBB2_4:                                #   in Loop: Header=BB2_3 Depth=2
+	ld	a0, -24(s0)
+	lw	a1, -40(s0)
+	slli	a1, a1, 2
+	add	a1, a1, a0
+	lw	a0, 0(a1)
+	lw	a1, 4(a1)
+	call	int_comparator
+	beqz	a0, .LBB2_6
+	j	.LBB2_5
+.LBB2_5:                                #   in Loop: Header=BB2_3 Depth=2
+	ld	a0, -24(s0)
+	lw	a1, -40(s0)
+	addiw	a2, a1, 1
+	call	int_swap
+	sd	a0, -24(s0)
+	li	a0, 1
+	sw	a0, -36(s0)
+	j	.LBB2_6
+.LBB2_6:                                #   in Loop: Header=BB2_3 Depth=2
+	j	.LBB2_7
+.LBB2_7:                                #   in Loop: Header=BB2_3 Depth=2
+	lw	a0, -40(s0)
+	addiw	a0, a0, 1
+	sw	a0, -40(s0)
+	j	.LBB2_3
+.LBB2_8:                                #   in Loop: Header=BB2_1 Depth=1
+	lw	a0, -32(s0)
+	addiw	a0, a0, 1
+	sw	a0, -32(s0)
+	j	.LBB2_1
+.LBB2_9:
+	ld	a0, -24(s0)
+	ld	ra, 40(sp)                      # 8-byte Folded Reload
+	ld	s0, 32(sp)                      # 8-byte Folded Reload
+	addi	sp, sp, 48
+	ret
+.Lfunc_end2:
+	.size	bubble_sort, .Lfunc_end2-bubble_sort
+	.cfi_endproc
+                                        # -- End function
+	.globl	main                            # -- Begin function main
+	.p2align	1
+	.type	main,@function
+main:                                   # @main
+	.cfi_startproc
+# %bb.0:
+	addi	sp, sp, -48
+	.cfi_def_cfa_offset 48
+	sd	ra, 40(sp)                      # 8-byte Folded Spill
+	sd	s0, 32(sp)                      # 8-byte Folded Spill
+	.cfi_offset ra, -8
+	.cfi_offset s0, -16
+	addi	s0, sp, 48
+	.cfi_def_cfa s0, 0
+	li	a0, 0
+	sd	a0, -48(s0)                     # 8-byte Folded Spill
+	sw	a0, -20(s0)
+	li	a0, 3
+	sw	a0, -24(s0)
+	lw	a0, -24(s0)
+	slli	a0, a0, 2
+	call	malloc
+	sd	a0, -32(s0)
+	lw	a1, -24(s0)
+.Lpcrel_hi0:
+	auipc	a0, %pcrel_hi(.L.str)
+	addi	a0, a0, %pcrel_lo(.Lpcrel_hi0)
+	call	printf
+                                        # kill: def $x11 killed $x10
+	ld	a0, -48(s0)                     # 8-byte Folded Reload
+	sw	a0, -36(s0)
+	j	.LBB3_1
+.LBB3_1:                                # =>This Loop Header: Depth=1
+                                        #     Child Loop BB3_3 Depth 2
+	lw	a0, -36(s0)
+	lw	a1, -24(s0)
+	bge	a0, a1, .LBB3_7
+	j	.LBB3_2
+.LBB3_2:                                #   in Loop: Header=BB3_1 Depth=1
+.Lpcrel_hi1:
+	auipc	a0, %pcrel_hi(.L.str.1)
+	addi	a0, a0, %pcrel_lo(.Lpcrel_hi1)
+	call	printf
+	j	.LBB3_3
+.LBB3_3:                                #   Parent Loop BB3_1 Depth=1
+                                        # =>  This Inner Loop Header: Depth=2
+	ld	a0, -32(s0)
+	lw	a1, -36(s0)
+	slli	a1, a1, 2
+	add	a1, a1, a0
+.Lpcrel_hi2:
+	auipc	a0, %pcrel_hi(.L.str.2)
+	addi	a0, a0, %pcrel_lo(.Lpcrel_hi2)
+	call	scanf
+	li	a1, 1
+	beq	a0, a1, .LBB3_5
+	j	.LBB3_4
+.LBB3_4:                                #   in Loop: Header=BB3_3 Depth=2
+.Lpcrel_hi3:
+	auipc	a0, %pcrel_hi(.L.str.3)
+	addi	a0, a0, %pcrel_lo(.Lpcrel_hi3)
+	call	printf
+	j	.LBB3_3
+.LBB3_5:                                #   in Loop: Header=BB3_1 Depth=1
+	j	.LBB3_6
+.LBB3_6:                                #   in Loop: Header=BB3_1 Depth=1
+	lw	a0, -36(s0)
+	addiw	a0, a0, 1
+	sw	a0, -36(s0)
+	j	.LBB3_1
+.LBB3_7:
+	ld	a0, -32(s0)
+	lw	a1, -24(s0)
+	call	bubble_sort
+	sd	a0, -32(s0)
+.Lpcrel_hi4:
+	auipc	a0, %pcrel_hi(.L.str.4)
+	addi	a0, a0, %pcrel_lo(.Lpcrel_hi4)
+	call	printf
+	li	a0, 0
+	sw	a0, -40(s0)
+	j	.LBB3_8
+.LBB3_8:                                # =>This Inner Loop Header: Depth=1
+	lw	a0, -40(s0)
+	lw	a1, -24(s0)
+	bge	a0, a1, .LBB3_11
+	j	.LBB3_9
+.LBB3_9:                                #   in Loop: Header=BB3_8 Depth=1
+	ld	a0, -32(s0)
+	lw	a1, -40(s0)
+	slli	a1, a1, 2
+	add	a0, a0, a1
+	lw	a1, 0(a0)
+.Lpcrel_hi5:
+	auipc	a0, %pcrel_hi(.L.str.5)
+	addi	a0, a0, %pcrel_lo(.Lpcrel_hi5)
+	call	printf
+	j	.LBB3_10
+.LBB3_10:                               #   in Loop: Header=BB3_8 Depth=1
+	lw	a0, -40(s0)
+	addiw	a0, a0, 1
+	sw	a0, -40(s0)
+	j	.LBB3_8
+.LBB3_11:
+	li	a0, 0
+	ld	ra, 40(sp)                      # 8-byte Folded Reload
+	ld	s0, 32(sp)                      # 8-byte Folded Reload
+	addi	sp, sp, 48
+	ret
+.Lfunc_end3:
+	.size	main, .Lfunc_end3-main
+	.cfi_endproc
+                                        # -- End function
+	.type	.L.str,@object                  # @.str
+	.section	.rodata.str1.1,"aMS",@progbits,1
+.L.str:
+	.asciz	"input %d int value: \n"
+	.size	.L.str, 22
+
+	.type	.L.str.1,@object                # @.str.1
+.L.str.1:
+	.asciz	"input int value: "
+	.size	.L.str.1, 18
+
+	.type	.L.str.2,@object                # @.str.2
+.L.str.2:
+	.asciz	"%d"
+	.size	.L.str.2, 3
+
+	.type	.L.str.3,@object                # @.str.3
+.L.str.3:
+	.asciz	"wrong value, try again"
+	.size	.L.str.3, 23
+
+	.type	.L.str.4,@object                # @.str.4
+.L.str.4:
+	.asciz	"sorted array: "
+	.size	.L.str.4, 15
+
+	.type	.L.str.5,@object                # @.str.5
+.L.str.5:
+	.asciz	"%d "
+	.size	.L.str.5, 4
+
+	.ident	"clang version 20.0.0git (https://github.com/llvm/llvm-project 3b0e120336846f450d9dd46936934be7a860f58d)"
+	.section	".note.GNU-stack","",@progbits
+	.addrsig
+	.addrsig_sym int_comparator
+	.addrsig_sym int_swap
+	.addrsig_sym bubble_sort
+	.addrsig_sym malloc
+	.addrsig_sym printf
+	.addrsig_sym scanf
