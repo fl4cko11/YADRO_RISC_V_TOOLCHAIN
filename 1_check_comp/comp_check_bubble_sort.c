@@ -12,7 +12,6 @@ int *int_swap(int *array, int index1, int index2) {
     return array;  
 }
 
-
 int *bubble_sort(int *array, int len_array) {
     int i = 0;
     int flag = 1;

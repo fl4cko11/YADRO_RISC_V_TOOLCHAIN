@@ -5,7 +5,7 @@
 
 // /home/vlados/riscv-toolchain/risc_v_gcc_newlib/bin/riscv64-unknown-elf-gcc - gcc_newlib
 
-// /home/vlados/riscv-toolchain/llvm/llvm-project/build/bin/clang - clang (таргет явно указать, сисруты не надо)
+// /home/vlados/riscv-toolchain/llvm/llvm-project/build/bin/clang -target riscv64-unknown-linux-gnu - clang (таргет явно указать, сисруты не надо)
 
 int int_comparator(int a1, int a2) {
     return a1 > a2 ? 1 : 0;
@@ -17,7 +17,6 @@ int *int_swap(int *array, int index1, int index2) {
     array[index2] = temp;
     return array;  
 }
-
 
 int *bubble_sort(int *array, int len_array) {
     int i = 0;
